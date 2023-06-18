@@ -17,7 +17,10 @@ export default function ChatWindow() {
         <h1 className="text-white text-2xl"> Chat Rooms </h1>
         <div className="flex flex-wrap justify-center">
           <div className="my-4 md:my-16 h-max w-max mx-4 bg-green-100 p-4 rounded-lg shadow-lg text-center">
-            <h1 className="font-bold text-lg tracking-wide"> Create Room </h1>
+            <h1 className="font-bold font-rob text-lg tracking-wide">
+              {" "}
+              Create Room{" "}
+            </h1>
             <div>
               <img
                 src="https://cdn-icons-png.flaticon.com/128/2645/2645420.png"
@@ -29,7 +32,10 @@ export default function ChatWindow() {
             </Button>
           </div>
           <div className="my-4 md:my-16 h-max w-max mx-4 bg-blue-100 p-4 rounded-lg shadow-lg text-center">
-            <h1 className="font-bold text-lg tracking-wide"> Join Room </h1>
+            <h1 className="font-bold font-rob text-lg tracking-wide">
+              {" "}
+              Join Room{" "}
+            </h1>
             <div>
               <img
                 src="https://cdn-icons-png.flaticon.com/128/5500/5500817.png"

@@ -5,10 +5,17 @@ module.exports = withMT({
   theme: {
     extend: {
       fontFamily: {
-        head: ["Poppins"],
-        main: ["Nunito"],
-        extra: ["Quicksand"],
+        pop: "Poppins",
+        int: "Inter",
+        qs: "Quicksand",
+        rob: "Roboto",
+        nun: "Nunito",
       },
+      backgroundColor: {
+        mainBg: "#111b21",
+        headBg: "#202c33",
+      },
+      
     },
   },
   plugins: [],

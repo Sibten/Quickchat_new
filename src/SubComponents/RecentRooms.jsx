@@ -30,7 +30,7 @@ export default function RecentRooms({ update }) {
 
   return (
     <div>
-      <div className="p-4 font-head mx-8 lg:w-1/2 lg:mx-auto border border-gray-500 my-4 rounded-md max-h-96 overflow-y-auto">
+      <div className="p-4 font-pop mx-8 lg:w-1/2 lg:mx-auto border border-gray-500 my-4 rounded-md max-h-96 overflow-y-auto">
         <h1 className="text-white text-xl">Recent Rooms </h1>
         <div className="my-4">
           {data.map((s) => (

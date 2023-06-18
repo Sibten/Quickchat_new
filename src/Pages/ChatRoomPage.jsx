@@ -24,6 +24,14 @@ export default function ChatRoomPage() {
 
   const [join, setJoin] = useState(0);
 
+  const [chat, setChat] = useState([
+    {
+      type: "",
+      desc: { message: "", auth: "", time: Date },
+    },
+  ]);
+  const [Message, setMessage] = useState("");
+
   useEffect(() => {
     console.log(params.chatcode);
     const config = {
@@ -42,51 +50,86 @@ export default function ChatRoomPage() {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
 
-  useEffect(() => {
     socket.emit("join", params.chatcode);
     socket.emit(
       "new-user-joined",
       params.chatcode,
       Cookies.get("email").split("@")[0]
     );
-    socket.on("User Joined", (name) => {
-      join.push(`${name} is join the conversation`);
-    });
   }, []);
+
+  socket.on("User Joined", (name) => {
+    chat.push({ type: 0, desc: name });
+    setChat([...chat]);
+  });
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    console.log(Message);
+    socket.emit("send", Message, params.chatcode, Cookies.get("email"));
+  };
+
+  socket.on("new message", (message) => {
+    console.log(message);
+    chat.push({ type: 1, desc: message });
+    setChat([...chat]);
+    setMessage("");
+  });
 
   return (
     <div className="lg:w-1/2 lg:mx-auto mx-2 ">
-      {join ? (
-        <>
-          <div className="bg-gray-700 p-4 rounded-md">
-            {" "}
-            <h1 className="text-xl font-head text-white font-bold">
-              {" "}
-              {roomData.chat_room_name}{" "}
-            </h1>{" "}
-          </div>
-          <div className="msgbox border h-[28rem] lg:h-[44rem] rounded-md border-gray-700 -mt-2 overflow-y-auto p-4">
-            {join.map((s) => (
-              <p key={s} className="text-white">
-                {s}
-              </p>
-            ))}
-          </div>
-          <div className="flex">
-            <input
-              type="text"
-              className="w-full bg-gray-700 rounded-full my-2 p-2 text-white text-xl border-gray-700 font-main h-max focus:outline-gray-700 "
-            ></input>
-            <button className="rounded-full bg-green-600 text-xl h-max my-2 mx-2 p-3">
-              <IoPaperPlane />
-            </button>
-          </div>{" "}
-        </>
-      ) : (
-        <Button>Join the Chat</Button>
-      )}
+      <div className="p-4 bg-headBg rounded-lg font-bold font-int text-xl text-brown-50 ">
+        {" "}
+        {roomData.chat_room_name}{" "}
+      </div>
+      <div className="p-3 bg-mainBg rounded-lg h-[32rem] overflow-y-auto text-gray-300 my-1 font-int">
+        <ul className="font-rob text-center">
+          {chat.map((s) =>
+            s.type == 0 ? (
+              <li key={`${s.type}-${new Date()}`}>
+                {s.desc.auth == "" ? "You" : s.desc.auth} joined the chat
+              </li>
+            ) : (
+              <li
+                className={
+                  s.desc.auth == Cookies.get("email")
+                    ? "bg-green-700 p-1 my-1 rounded-lg w-max ml-auto clear-left text-black"
+                    : "bg-cyan-700 my-1 p-2 rounded-lg w-max clear-right text-black"
+                }
+              >
+                <h3 className="text-xs font-bold my-1">
+                  {s.desc.auth.split("@")[0]}
+                </h3>{" "}
+                <p className="text-left"> {s.desc.message}</p>
+                <p className="text-xs text-right">
+                  {" "}
+                  {new Date(s.desc.time).toLocaleTimeString()}
+                </p>
+              </li>
+            )
+          )}
+        </ul>
+      </div>
+      <form>
+        <div className="flex font-int">
+          <input
+            type="text"
+            name="chat"
+            id="chat"
+            value={Message}
+            className="bg-headBg text-white p-2 w-full rounded-full"
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <button
+            className="bg-green-500 rounded-full h-max w-max  p-2 text-xl mx-2"
+            onClick={sendMessage}
+            type="submit"
+          >
+            <IoPaperPlane />
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -83,7 +83,7 @@ export default function Login() {
   const [continueDisable, setContinuedisable] = useState(1);
   return (
     <div className="p-4">
-      <DialogHeader className="font-head flex">
+      <DialogHeader className="font-pop flex">
         <img
           src="https://cdn-icons-png.flaticon.com/128/666/666201.png"
           alt=""
@@ -106,7 +106,7 @@ export default function Login() {
               </p>
               <Input
                 label="OTP"
-                className="text-lg font-head"
+                className="text-lg font-pop"
                 value={authData.otp}
                 onChange={(e) =>
                   setAuthData({ ...authData, otp: e.target.value })
@@ -116,7 +116,7 @@ export default function Login() {
           ) : (
             <Input
               label="Email"
-              className="text-lg font-head"
+              className="text-lg font-pop"
               onChange={validateEmail}
             />
           )}

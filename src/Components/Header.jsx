@@ -20,17 +20,17 @@ export default function Header() {
   return (
     <div className="p-4 flex flex-wrap  justify-around text-white">
       <Link to="/">
-        <h1 className="text-2xl font-head text-white font-bold">Quick Chat</h1>
+        <h1 className="text-2xl font-pop text-white font-bold">Quick Chat</h1>
       </Link>
       <div className="flex">
         {" "}
         {login ? (
           <>
-            <ul className="flex mx-8 flex-wrap">
+            <ul className="flex mx-8 font-int flex-wrap">
               <li>
                 <Link to="/chatwindow">
                   {" "}
-                  <h1 className="text-xl mx-2 my-1 font-head flex">
+                  <h1 className="text-xl mx-2 my-1 flex">
                     {" "}
                     <HiChatBubbleOvalLeftEllipsis className="my-1 mx-2" /> Chat
                     Room
@@ -39,7 +39,7 @@ export default function Header() {
               </li>
               <li>
                 <Link>
-                  <h1 className="text-xl mx-2 my-1 font-head flex">
+                  <h1 className="text-xl mx-2 my-1 flex">
                     {" "}
                     <FaUser className="my-1 mx-2" /> Profile
                   </h1>
