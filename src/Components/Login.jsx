@@ -72,7 +72,7 @@ export default function Login() {
         console.log(response.data);
         Cookies.set("email", authData.email);
         Cookies.set("token", response.data.token);
-        navigate("/chatwindow");
+        navigate("/chats");
       })
       .catch(function (error) {
         console.log(error);

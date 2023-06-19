@@ -28,17 +28,16 @@ export default function Header() {
           <>
             <ul className="flex mx-8 font-int flex-wrap">
               <li>
-                <Link to="/chatwindow">
+                <Link to="/chats">
                   {" "}
                   <h1 className="text-xl mx-2 my-1 flex">
                     {" "}
-                    <HiChatBubbleOvalLeftEllipsis className="my-1 mx-2" /> Chat
-                    Room
+                    <HiChatBubbleOvalLeftEllipsis className="my-1 mx-2" /> Chats
                   </h1>
                 </Link>
               </li>
               <li>
-                <Link>
+                <Link to="/profile">
                   <h1 className="text-xl mx-2 my-1 flex">
                     {" "}
                     <FaUser className="my-1 mx-2" /> Profile
