@@ -5,6 +5,7 @@ import Login from "./Login";
 import Cookies from "js-cookie";
 import { HiChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
 import { FaUser } from "react-icons/fa";
+import { BsPeopleFill } from "react-icons/bs";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -29,10 +30,18 @@ export default function Header() {
             <ul className="flex mx-8 font-int flex-wrap">
               <li>
                 <Link to="/chats">
+                  <h1 className="text-xl mx-2 my-1 flex">
+                    {" "}
+                    <HiChatBubbleOvalLeftEllipsis className="my-1 mx-2" /> Chat
+                  </h1>
+                </Link>
+              </li>
+              <li>
+                <Link to="/people">
                   {" "}
                   <h1 className="text-xl mx-2 my-1 flex">
                     {" "}
-                    <HiChatBubbleOvalLeftEllipsis className="my-1 mx-2" /> Chats
+                    <BsPeopleFill className="my-1 mx-2" /> People
                   </h1>
                 </Link>
               </li>

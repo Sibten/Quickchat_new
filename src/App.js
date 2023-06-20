@@ -6,8 +6,10 @@ import Header from "./Components/Header";
 
 import ChatWindow from "./Pages/ChatRoomWindow";
 import ChatRoomPage from "./Pages/ChatRoomPage";
-import Chats from "./Pages/Chats";
+import Pepole from "./Pages/People";
 import Profile from "./Pages/Profile";
+import Chats from "./Pages/Chats";
+import Chatpage from "./Pages/Chatpage";
 
 export default function App() {
   return (
@@ -15,8 +17,14 @@ export default function App() {
       <Header />
       <Routes>
         <Route path={"/"} exact element={<Home />} />
+        <Route path="/people" exact element={<Pepole />} />
         <Route path="/chats" exact element={<Chats />} />
         <Route path="/profile" exact element={<Profile />} />
+        <Route
+          path="/chats/:senderid/:recieverid"
+          exact
+          element={<Chatpage />}
+        />
       </Routes>
     </div>
   );
