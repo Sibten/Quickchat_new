@@ -6,8 +6,10 @@ import Cookies from "js-cookie";
 import { HiChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
 import { FaUser } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
-
+import { io } from "socket.io-client";
 export default function Header() {
+  const URL = "http://localhost:8000";
+  const socket = io(URL);
   const [open, setOpen] = useState(false);
 
   const [login, setLogin] = useState(Cookies.get("email"));
@@ -55,8 +57,9 @@ export default function Header() {
               </li>
             </ul>
             <Button
-              color="green"
+              color="red"
               onClick={() => {
+                socket.emit("user-disconnect");
                 handleOpen();
                 setLogin(Cookies.remove("email"));
                 navigate("/");

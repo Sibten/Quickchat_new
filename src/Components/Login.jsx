@@ -9,11 +9,16 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { io } from "socket.io-client";
 
 export default function Login() {
   const [authData, setAuthData] = useState({ email: "", otp: "" });
   const [sentOTP, setsentOTP] = useState(0);
   const [mailSent, setMailSent] = useState(0);
+
+  const URL = "http://localhost:8000";
+  const socket = io(URL);
+
   const validateEmail = (e) => {
     let emailRegx = /^[A-Za-z0-9\-._]+@([A-Za-z0-9-]+\.)+[a-z]{2,4}$/gm;
     if (emailRegx.test(e.target.value)) {
@@ -72,6 +77,7 @@ export default function Login() {
         console.log(response.data);
         Cookies.set("email", authData.email);
         Cookies.set("token", response.data.token);
+        socket.emit("user-connect");
         navigate("/chats");
       })
       .catch(function (error) {

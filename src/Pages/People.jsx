@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Pepole() {
   const [users, setUsers] = useState([{ user_name: "", user_email: "" }]);
@@ -13,6 +14,10 @@ export default function Pepole() {
       user_name: "",
       user_email: "",
     },
+  ]);
+
+  const [printUser, setPrintUser] = useState([
+    { user_name: "", user_email: "" },
   ]);
 
   useEffect(() => {
@@ -68,7 +73,25 @@ export default function Pepole() {
       .catch(function (error) {
         console.log(error);
       });
+    const config4 = {
+      method: "get",
+      url: `http://localhost:8001/user/myfriends?email=${Cookies.get("email")}`,
+      headers: {
+        token: Cookies.get("token"),
+      },
+    };
+
+    axios(config4)
+      .then(function (response) {
+        substractUsers.push(...response.data.friends);
+        setSubStractUser([...substractUsers]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
+
+  const navigate = useNavigate();
 
   const invitePerson = (email) => {
     substractUsers.push({ user_email: email, user_name: email.split("@")[0] });
@@ -94,6 +117,7 @@ export default function Pepole() {
       .catch(function (error) {
         console.log(error);
       });
+    alert("Invitation Sent!");
   };
 
   return (
@@ -103,7 +127,8 @@ export default function Pepole() {
           {" "}
           Peoples, You may known
         </h1>
-        <div className="bg-gray-800 p-4 h-[48rem] overflow-y-auto rounded-lg">
+        {console.log(substractUsers)}
+        <div className="bg-gray-800 p-4 max-h-[48rem] overflow-y-auto rounded-lg">
           {users.map((u) => {
             const find = substractUsers.findIndex(
               (s) => s.user_email == u.user_email
@@ -114,7 +139,6 @@ export default function Pepole() {
                   key={u.user_email}
                   className="my-4 flex border border-gray-700 p-4 rounded-md"
                 >
-                  {find}
                   <img
                     src="https://cdn-icons-png.flaticon.com/128/3899/3899618.png"
                     alt=""
@@ -127,7 +151,7 @@ export default function Pepole() {
                   <div className="w-max ml-auto my-2">
                     <Button
                       className="h-max w-max"
-                      onClick={() => invitePerson(u.user_email)}
+                      onClick={(e) => invitePerson(u.user_email)}
                     >
                       Invite
                     </Button>

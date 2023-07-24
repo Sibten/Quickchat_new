@@ -4,8 +4,6 @@ import Home from "./Pages/Home";
 import "./App.css";
 import Header from "./Components/Header";
 
-import ChatWindow from "./Pages/ChatRoomWindow";
-import ChatRoomPage from "./Pages/ChatRoomPage";
 import Pepole from "./Pages/People";
 import Profile from "./Pages/Profile";
 import Chats from "./Pages/Chats";

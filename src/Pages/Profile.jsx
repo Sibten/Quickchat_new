@@ -3,6 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [userData, setUserData] = useState({
@@ -55,6 +56,8 @@ export default function Profile() {
       });
   }, []);
 
+  const navigate = useNavigate();
+
   const acceptInvite = (email) => {
     const data = JSON.stringify({
       from: Cookies.get("email"),
@@ -78,6 +81,7 @@ export default function Profile() {
       .catch(function (error) {
         console.log(error);
       });
+    alert("Invitation Accepted!");
   };
 
   if (Cookies.get("email")) {
